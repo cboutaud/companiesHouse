@@ -1,25 +1,31 @@
 import csv
 
+# What Ya Readin' Boi?
 inputfile = open('Prod195_1111_ni_sample.dat', 'r')
 
+# Company Record Writer
 outputfile = open('companyRecord.csv', 'wb')
 csv_writer = csv.writer(outputfile)
 csv_writer.writerow(["companyNumber","recordType","companyStatus","numberOfOfficers","companyNameLenght","companyName"])
 
+# Person Record Writer
 personfile = open('personRecord.csv', 'wb')
 person_writer = csv.writer(personfile)
 person_writer.writerow(["companyNumber","recordType","appDateOrigin","appointmentType","corporateIndicator","appointmentDate",
 						"resignationDate","personPostcode","partialDateOfBirth","fullDateOfBirth","variableData"])
 
+# Skip Header Identifier
 next(inputfile)
 
+#Loop That Thang
 for index, row in enumerate(inputfile):
 	# Where Ya @ Boi?
 	if (index-1)%10000 == 0:
 		print str(index-1) + ' ROWS COMPLETED! YOUPIDOU!'
 
+	# Magic Happens Here
 	try :
-		# Company Record
+		# Company Record Do This
 		if row[8] == '1':
 			companyNumber = row[0:8]
 			recordType = row[8]
@@ -32,7 +38,7 @@ for index, row in enumerate(inputfile):
 		# End Of File Identifier
 		elif row[0:8] == '99999999':
 			break
-		#Person Record
+		#Person Record Do That
 		else:
 			companyNumber = row[0:8]
 			recordType = row[8]
